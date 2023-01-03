@@ -1,9 +1,15 @@
-const person: {
-  name: string;
-  age: number;
-} = {
-  name: "Minh",
-  age: 25,
-};
+let userInput: unknown;
+let userName: string;
 
-console.log(person.name);
+userInput = 5;
+userInput = "Minh";
+
+if (typeof userInput === "string") {
+  userName = userInput;
+}
+
+function generateError(message: string, code: number): never {
+  throw { message: message, errorCode: code };
+}
+
+generateError("An error occured", 500);
