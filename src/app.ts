@@ -1,63 +1,32 @@
-// Code goes here!
-class Department {
-  protected employees: string[] = [];
+interface AddFn {
+  (a: number, b: number): number;
+}
 
-  constructor(private readonly id: string, public name: string) {}
+const add: AddFn = (n1: number, n2: number) => n1 + n2;
 
-  describe(this: Department) {
-    console.log(`Department (${this.id}): ${this.name}`);
+interface Named {
+  readonly name?: string;
+  outputName?: string;
+}
+
+interface Greetable extends Named {
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  name?: string;
+  age: number = 26;
+
+  constructor(n?: string) {
+    if (n) this.name = n;
   }
 
-  addEmployee(employee: string) {
-    this.employees.push(employee);
-  }
-
-  printEmployeeInformation() {
-    console.log(this.employees.length);
-    console.log(this.employees);
+  greet(phrase: string) {
+    if (this.name) console.log(phrase + " " + this.name);
+    else console.log("Hi!");
   }
 }
 
-class ITDepartment extends Department {
-  admins: string[];
-  constructor(id: string, admins: string[]) {
-    super(id, "IT");
-    this.admins = admins;
-  }
-}
+let user1 = new Person();
 
-class AccountingDepartment extends Department {
-  constructor(id: string, private reports: string[]) {
-    super(id, "Accounting");
-  }
-
-  addEmployee(name: string) {
-    if (name === "Minh") {
-      return;
-    }
-    this.employees.push(name);
-  }
-
-  addReport(text: string) {
-    this.reports.push(text);
-  }
-
-  printReports() {
-    console.log(this.reports);
-  }
-}
-
-const it = new ITDepartment("d1", ["Minh"]);
-
-it.addEmployee("Minh");
-it.addEmployee("Vu");
-
-it.describe();
-it.printEmployeeInformation();
-
-console.log(it);
-
-const accounting = new AccountingDepartment("d2", []);
-
-accounting.addReport("Something went wrong...");
-accounting.printReports();
+user1.greet("Hello the notorious");

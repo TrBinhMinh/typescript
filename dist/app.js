@@ -1,74 +1,19 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var Department = (function () {
-    function Department(id, name) {
-        this.id = id;
-        this.name = name;
-        this.employees = [];
+var add = function (n1, n2) { return n1 + n2; };
+var Person = (function () {
+    function Person(n) {
+        this.age = 26;
+        if (n)
+            this.name = n;
     }
-    Department.prototype.describe = function () {
-        console.log("Department (".concat(this.id, "): ").concat(this.name));
+    Person.prototype.greet = function (phrase) {
+        if (this.name)
+            console.log(phrase + " " + this.name);
+        else
+            console.log("Hi!");
     };
-    Department.prototype.addEmployee = function (employee) {
-        this.employees.push(employee);
-    };
-    Department.prototype.printEmployeeInformation = function () {
-        console.log(this.employees.length);
-        console.log(this.employees);
-    };
-    return Department;
+    return Person;
 }());
-var ITDepartment = (function (_super) {
-    __extends(ITDepartment, _super);
-    function ITDepartment(id, admins) {
-        var _this = _super.call(this, id, "IT") || this;
-        _this.admins = admins;
-        return _this;
-    }
-    return ITDepartment;
-}(Department));
-var AccountingDepartment = (function (_super) {
-    __extends(AccountingDepartment, _super);
-    function AccountingDepartment(id, reports) {
-        var _this = _super.call(this, id, "Accounting") || this;
-        _this.reports = reports;
-        return _this;
-    }
-    AccountingDepartment.prototype.addEmployee = function (name) {
-        if (name === "Minh") {
-            return;
-        }
-        this.employees.push(name);
-    };
-    AccountingDepartment.prototype.addReport = function (text) {
-        this.reports.push(text);
-    };
-    AccountingDepartment.prototype.printReports = function () {
-        console.log(this.reports);
-    };
-    return AccountingDepartment;
-}(Department));
-var it = new ITDepartment("d1", ["Minh"]);
-it.addEmployee("Minh");
-it.addEmployee("Vu");
-it.describe();
-it.printEmployeeInformation();
-console.log(it);
-var accounting = new AccountingDepartment("d2", []);
-accounting.addReport("Something went wrong...");
-accounting.printReports();
+var user1 = new Person();
+user1.greet("Hello the notorious");
 //# sourceMappingURL=app.js.map
